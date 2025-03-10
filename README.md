@@ -1,3 +1,3 @@
 # ScoreMate
 
-Live Demo Site: https://jwin-mm.github.io/Scoremate/
+Live Demo Site: https://jwin-mm.github.io/scoremate/
