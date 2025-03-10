@@ -1,0 +1,22 @@
+/* Large Buttons (Pouncing, Pinning, Chasing, etc.) */
+.timer-button {
+    width: 100%;
+    height: 140px;
+    font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    background-color: #646cff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.timer-button:hover {
+    background-color: #535bf2;
+}
+
+.timer-button:disabled {
+    background-color: #444;
+    cursor: not-allowed;
+}

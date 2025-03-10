@@ -1,13 +1,13 @@
 import { atom } from 'jotai';
 
 // Atom for form data
-export const formDataAtom = atom<{
-  testName: string;
-  experimenterName: string;
-  animalNumber: string;
-  experimentDate: string;
-  experimentTime: string;
-} | null>(null);
+export const formDataAtom = atom({
+  testName: '',
+  experimenterName: '',
+  animalNumber: '',
+  experimentDate: '',
+  experimentTime: '',
+});
 
 // Atom for timer states
 export const timersAtom = atom<{ [key: string]: number }>({

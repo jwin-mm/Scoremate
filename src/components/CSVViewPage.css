@@ -1,0 +1,83 @@
+/* Full-page container */
+.csv-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+    background: #1e1e1e;
+    color: white;
+    overflow: hidden;
+  }
+  
+  /* Title Styling */
+  .csv-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Table Container */
+  .csv-table-container {
+    width: 90%;
+    max-width: 900px;
+    overflow-x: auto;
+    background: #2a2a2a;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Table Styling */
+  .csv-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  
+  .csv-table th, .csv-table td {
+    padding: 12px;
+    border: 1px solid #444;
+  }
+  
+  .csv-table th {
+    background: #646cff;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .csv-table td {
+    background: #2a2a2a;
+    color: white;
+  }
+  
+  .csv-table tr:nth-child(even) td {
+    background: #1e1e1e;
+  }
+  
+  /* Button Row */
+  .csv-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  /* Button Styling */
+  .csv-button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    background-color: #646cff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .csv-button:hover {
+    background-color: #535bf2;
+  }
+  

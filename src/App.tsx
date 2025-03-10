@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import FormPage from './components/FormPage';
 import ExperimentPage from './components/ExperimentPage';
-import CsvViewerPage from './components/CsvViewerPage';
+import CsvViewerPage from './components/CSVViewPage';
+import './App.css'
 
 const App: React.FC = () => {
   return (

@@ -2,18 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
 import { formDataAtom } from '../atoms';
+import './FormPage.css'
 
 const FormPage: React.FC = () => {
-  const [form, setForm] = useState({
-    testName: '',
-    experimenterName: '',
-    animalNumber: '',
-    experimentDate: '',
-    experimentTime: '',
-  });
-
+  const [form, setForm] = useAtom(formDataAtom);
   const [errorMessage, setErrorMessage] = useState('');
-  const [, setFormData] = useAtom(formDataAtom); // Update the formDataAtom
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +18,7 @@ const FormPage: React.FC = () => {
 
     // Find fields that are empty
     const emptyFields = Object.entries(form)
-      .filter(([_, value]) => value.trim() === '')
+      .filter(([, value]) => value.trim() === '')
       .map(([key]) => key);
 
     if (emptyFields.length > 0) {
@@ -34,7 +27,8 @@ const FormPage: React.FC = () => {
     }
 
     setErrorMessage(''); // Clear any previous error messages
-    setFormData(form);
+    setForm(form);
+    console.log(form)
     navigate('/experiment');
   };
 
