@@ -1,3 +1,3 @@
-# ScoreMate
+# PlayMate
 
-Live Demo Site: https://jwin-mm.github.io/scoremate/
+Live Demo Site: https://jwin-mm.github.io/playmate/

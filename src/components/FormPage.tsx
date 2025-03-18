@@ -5,19 +5,19 @@ import { formDataAtom } from '../atoms';
 import './FormPage.css'
 
 const FormPage: React.FC = () => {
-  const [form, setForm] = useAtom(formDataAtom);
+  const [formData, setFormData] = useAtom(formDataAtom);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     // Find fields that are empty
-    const emptyFields = Object.entries(form)
+    const emptyFields = Object.entries(formData)
       .filter(([, value]) => value.trim() === '')
       .map(([key]) => key);
 
@@ -27,8 +27,8 @@ const FormPage: React.FC = () => {
     }
 
     setErrorMessage(''); // Clear any previous error messages
-    setForm(form);
-    console.log(form)
+    setFormData(formData);
+    console.log(formData)
     navigate('/experiment');
   };
 
@@ -36,16 +36,16 @@ const FormPage: React.FC = () => {
     <form onSubmit={handleSubmit}>
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       <div>
-        <label>Test Name:</label>
-        <input name="testName" value={form.testName} onChange={handleChange} />
+        <label>Experiment Title:</label>
+        <input name="testName" value={formData.testName} onChange={handleChange} />
       </div>
       <div>
         <label>Experimenter Name:</label>
-        <input name="experimenterName" value={form.experimenterName} onChange={handleChange} />
+        <input name="experimenterName" value={formData.experimenterName} onChange={handleChange} />
       </div>
       <div>
         <label>Rat Number:</label>
-        <input name="ratNumber" value={form.ratNumber} onChange={handleChange} />
+        <input name="ratNumber" value={formData.ratNumber} onChange={handleChange} />
       </div>
       <button type="submit">Start Experiment</button>
     </form>

@@ -7,7 +7,7 @@ import './App.css'
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter basename='/scoremate/'>
+    <BrowserRouter basename='/playmate/'>
       <Routes>
         <Route path="/" element={<FormPage />} />
         <Route path="/experiment" element={<ExperimentPage />} />

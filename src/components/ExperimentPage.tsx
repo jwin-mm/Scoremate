@@ -101,14 +101,15 @@ const ExperimentPage: React.FC = () => {
   };
 
   const generateCSV = () => {
+    console.log(timers)
     const csvContent = [
       [`Rat #:`, formData?.ratNumber, `Experimenter:`, formData?.experimenterName].join(','),
       [`Date:`, formData?.experimentDate].join(','),
       ['Action Type', 'Freq', 'Duration'].join(','), // Column headers
       ...Object.entries(timers).map(([key, value]) => [
-        key, timerCounters[key] || 0, value // Use the correct frequency value
+        key, timerCounters[key], value
       ]),
-    ].map(row => row.concat(',')).join('\n'); // Ensure proper CSV formatting
+    ].map(row => row).join('\n'); // Ensure proper CSV formatting
   
     setCsvData(csvContent);
     handleFinishExperiment(); // Ensure experiment stops when CSV is generated

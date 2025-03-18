@@ -1,10 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai';
-import { csvDataAtom } from '../atoms';
+import { csvDataAtom, formDataAtom } from '../atoms';
 import './CSVViewPage.css'; // Import the new CSS file
+import { useAtomValue } from 'jotai';
 
 const CsvViewerPage: React.FC = () => {
+  const formData = useAtomValue(formDataAtom);
   const [csvData] = useAtom(csvDataAtom);
   const navigate = useNavigate();
 
@@ -16,7 +18,7 @@ const CsvViewerPage: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'experiment_data.csv';
+    a.download = `${formData.ratNumber}_${formData.experimenterName}.csv`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
