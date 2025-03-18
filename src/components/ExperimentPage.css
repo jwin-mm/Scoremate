@@ -49,10 +49,49 @@
 /* Small Button Row */
 .button-row {
     display: flex;
-    justify-content: center;
+    align-items: center;
     gap: 15px;
     width: 100%;
     margin-top: 20px;
+    position: relative;
+}
+
+/* Center the Start Experiment button */
+.button-row .small-button:first-child {
+    margin: 0 auto;
+}
+
+/* Container for stacking CSV & Finish Experiment */
+.right-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Aligns them to the right */
+    gap: 10px;
+}
+
+.finish-button {
+    background-color: rgb(194, 66, 66) !important;
+    color: white !important;
+    border: 1px solid rgb(172, 50, 50) !important;
+}
+
+.finish-button:hover {
+    background-color: rgb(116, 33, 33) !important;
+}
+
+.finish-button:disabled {
+    background-color: #444 !important; /* Ensures consistency when disabled */
+    cursor: not-allowed;
+}
+
+/* Ensure it does not inherit unwanted styles from .small-button */
+.small-button:not(.finish-button) {
+    background-color: #2a2a2a;
+    border: 1px solid #646cff;
+}
+
+.small-button:not(.finish-button):hover {
+    background-color: #535bf2;
 }
 
 .small-button {

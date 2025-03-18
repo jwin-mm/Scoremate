@@ -44,26 +44,8 @@ const FormPage: React.FC = () => {
         <input name="experimenterName" value={form.experimenterName} onChange={handleChange} />
       </div>
       <div>
-        <label>Animal Number:</label>
-        <input name="animalNumber" value={form.animalNumber} onChange={handleChange} />
-      </div>
-      <div>
-        <label>Experiment Date:</label>
-        <input
-          type="date"
-          name="experimentDate"
-          value={form.experimentDate}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Experiment Time:</label>
-        <input
-          type="time"
-          name="experimentTime"
-          value={form.experimentTime}
-          onChange={handleChange}
-        />
+        <label>Rat Number:</label>
+        <input name="ratNumber" value={form.ratNumber} onChange={handleChange} />
       </div>
       <button type="submit">Start Experiment</button>
     </form>

@@ -20,3 +20,8 @@
     background-color: #444;
     cursor: not-allowed;
 }
+
+.timer-button.active {
+    background-color: #4caf50; /* Green when active */
+    color: white;
+  }
