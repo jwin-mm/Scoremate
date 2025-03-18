@@ -18,7 +18,7 @@ const CsvViewerPage: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${formData.ratNumber}_${formData.experimenterName}.csv`;
+    a.download = `${formData.ratNumber}_${formData.testName}.csv`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
