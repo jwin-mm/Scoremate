@@ -18,6 +18,6 @@
 }
 
 .timer-button.active {
-    background-color: #4caf50; /* Green when active */
+    background-color: #4caf50 !important;
     color: white;
   }
