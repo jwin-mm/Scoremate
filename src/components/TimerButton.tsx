@@ -30,7 +30,7 @@ const TimerButton: React.FC<TimerButtonProps> = ({ label, onTimeUpdate, disabled
   const handleTouchEnd = () => {
     if (!isActive || startTime === null) return;
 
-    const elapsedTime = Math.floor((Date.now() - startTime) / 1000); // Convert ms to sec
+    const elapsedTime = (Date.now() - startTime); // Convert ms to sec
     setHoldTime((prev) => prev + elapsedTime); // Accumulate total time
     setStartTime(null);
     setIsActive(false);
