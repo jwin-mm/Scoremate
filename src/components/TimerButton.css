@@ -12,10 +12,6 @@
     transition: background-color;
 }
 
-.timer-button:hover {
-    background-color: #535bf2;
-}
-
 .timer-button:disabled {
     background-color: #444;
     cursor: not-allowed;
