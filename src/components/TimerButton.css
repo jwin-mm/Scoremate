@@ -4,9 +4,9 @@
     height: 140px;
     font-size: 2rem;
     font-weight: bold;
-    border: none;
+    border: 1px solid #646cff;
     border-radius: 12px;
-    background-color: #646cff;
+    background-color: #444;
     color: white;
     cursor: pointer;
     transition: background-color;

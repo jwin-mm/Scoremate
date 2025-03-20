@@ -12,11 +12,14 @@
 }
 
 /* Title Styling */
-.experiment-title {
-    font-size: 3rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 40px;
+.timer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space flag-buttons apart */
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+    position: relative;
 }
 
 /* Centered button container */
@@ -48,7 +51,8 @@
 .button-row {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Space flag-buttons apart */
+    justify-content: center; /* Space flag-buttons apart */
+    gap: 20px;
     width: 100%;
     margin-top: 20px;
     position: relative;
@@ -67,12 +71,6 @@
 /* Hover effect for flag buttons */
 .flag-button:hover {
     background-color: rgb(116, 33, 33);
-}
-
-/* Small Buttons Grouped in the Center */
-.small-buttons-container {
-    display: flex;
-    gap: 15px; /* Adjust spacing between buttons */
 }
 
 /* Small Buttons - Uniform Styling */
@@ -103,7 +101,6 @@
     color: white;
     border: 1px solid #646cff;
     border-radius: 8px;
-    margin-top: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 }

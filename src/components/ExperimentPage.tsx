@@ -17,11 +17,14 @@ const ExperimentPage: React.FC = () => {
   const [experimentInterval, setExperimentInterval] = useState<NodeJS.Timeout | null>(null);
 
   // Function to format time as MM:SS
-  const formatTime = (seconds: number): string => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-  };
+  const formatTime = (milliseconds: number): string => {
+    const mins = Math.floor(milliseconds / 60000); // Convert to minutes
+    const secs = Math.floor((milliseconds % 60000) / 1000); // Convert remaining to seconds
+    const ms = milliseconds % 1000; // Get remaining milliseconds
+
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}:${ms.toString().padStart(3, '0')}`;
+};
+
 
   // Handle experiment timer (persisted with Jotai)
   useEffect(() => {
@@ -91,13 +94,18 @@ const ExperimentPage: React.FC = () => {
 
   return (
     <div className="experiment-container">
-      <h1 className="experiment-title">
+      <h2 className="experiment-title">
         {formData?.testName} _{formData?.note}_ {formData?.ratNumber}
-      </h1>
+      </h2>
 
-      <div className="experiment-timer">
-        <h2>Test Time: {formatTime(experimentTime)}</h2>
+      <div className='timer-row'>
+        <button className="flag-button" onClick={handleFlagButton}>Flag</button>
+        <div className="experiment-timer">
+          <h2>Test Time: {formatTime(experimentTime)}</h2>
+        </div>
+        <button className="flag-button" onClick={handleFlagButton}>Flag</button>
       </div>
+
 
       <div className="grid-container">
         <div className="grid-row">
@@ -116,14 +124,10 @@ const ExperimentPage: React.FC = () => {
       
 
       <div className="button-row">
-        <button className="flag-button" onClick={handleFlagButton}>Flag</button>
-        <div className="small-buttons-container">
-          <button className="small-button" onClick={handleStart}>Start</button>
-          <button className="small-button" onClick={handleStop}>Stop</button>
-        </div>
-        <button className="flag-button" onClick={handleFlagButton}>Flag</button>
+        <button className="small-button" onClick={handleStart}>Start</button>
+        <button className="small-button" onClick={handleStop}>Stop</button>
+        <button className="csv-button" onClick={generateCSV}>CSV</button>
       </div>
-      <button className="csv-button" onClick={generateCSV}>CSV</button>
     </div>
   );
 };
