@@ -35,7 +35,6 @@ const ExperimentPage: React.FC = () => {
     } else {
       if (experimentInterval) {
         clearInterval(experimentInterval);
-        setExperimentInterval(null);
       }
     }
   
@@ -66,7 +65,7 @@ const ExperimentPage: React.FC = () => {
   }
 
   const handleFlagButton = () => {
-    let newFlag = formatTime(experimentTime)
+    const newFlag = formatTime(experimentTime)
     setFormData((prev) => ({
       ...prev,
       flags: prev.flags ? `${prev.flags}, ${newFlag}` : newFlag, // Append new flag
