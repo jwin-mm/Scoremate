@@ -27,33 +27,6 @@
     width: 80%;
 }
 
-/* Main Buttons Container */
-.main-buttons {
-    display: flex;
-    align-items: center; /* Vertically aligns flag-button */
-    justify-content: center;
-    position: relative;
-    width: 100%;
-}
-
-/* Flag Button - Vertically Centered on the Left */
-.flag-button {
-    position: absolute;
-    left: 20px; /* Adjust distance from left edge */
-    top: 50%;
-    transform: translateY(-50%); /* Centers vertically */
-    width: 60px; /* Adjust button size */
-    height: 60px;
-    background-color: rgb(194, 66, 66); 
-    border: none;
-    border-radius: 50%; /* Makes it circular */
-    cursor: pointer;
-}
-
-.flag-button:hover {
-    background-color: rgb(116, 33, 33);
-}
-
 /* Grid Layout - One Row Per Line */
 .grid-container {
     display: flex;
@@ -65,66 +38,46 @@
 
 /* Ensures each row has a single row of buttons */
 .grid-row {
-    display: flex;
-    justify-content: center;
+    display:flex;
+    justify-content: space-between;
     gap: 20px;
     width: 100%;
-    max-width: 800px; /* Prevents stretching too wide */
 }
 
-
-
-/* Small Button Row */
+/* Button Row - Ensures proper spacing */
 .button-row {
     display: flex;
     align-items: center;
-    gap: 15px;
+    justify-content: space-between; /* Space flag-buttons apart */
     width: 100%;
     margin-top: 20px;
     position: relative;
 }
 
-/* Center the Start Experiment button */
-.button-row .small-button:first-child {
-    margin: 0 auto;
+/* Flag Buttons - Positioned on the left & right edges */
+.flag-button {
+    width: 60px;
+    height: 60px;
+    background-color: rgb(194, 66, 66);
+    border: none;
+    border-radius: 50%; /* Makes it circular */
+    cursor: pointer;
 }
 
-/* Container for stacking CSV & Finish Experiment */
-.right-buttons-container {
+/* Hover effect for flag buttons */
+.flag-button:hover {
+    background-color: rgb(116, 33, 33);
+}
+
+/* Small Buttons Grouped in the Center */
+.small-buttons-container {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* Aligns them to the right */
-    gap: 10px;
+    gap: 15px; /* Adjust spacing between buttons */
 }
 
-.finish-button {
-    background-color: rgb(194, 66, 66) !important;
-    color: white !important;
-    border: 1px solid rgb(172, 50, 50) !important;
-}
-
-.finish-button:hover {
-    background-color: rgb(116, 33, 33) !important;
-}
-
-.finish-button:disabled {
-    background-color: #444 !important; /* Ensures consistency when disabled */
-    cursor: not-allowed;
-}
-
-/* Ensure it does not inherit unwanted styles from .small-button */
-.small-button:not(.finish-button) {
-    background-color: #2a2a2a;
-    border: 1px solid #646cff;
-}
-
-.small-button:not(.finish-button):hover {
-    background-color: #535bf2;
-}
-
+/* Small Buttons - Uniform Styling */
 .small-button {
-    flex: 1;
-    max-width: 200px;
+    width: 150px; /* Set a fixed width */
     height: 60px;
     font-size: 1.2rem;
     font-weight: bold;
@@ -136,28 +89,25 @@
     transition: background-color 0.3s ease-in-out;
 }
 
+/* Hover effect for small buttons */
 .small-button:hover {
     background-color: #535bf2;
 }
 
-.small-button:disabled {
-    background-color: #444;
-    cursor: not-allowed;
-}
-
-/* Back Button */
-.back-button {
-    margin-top: 30px;
-    font-size: 1.3rem;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 8px;
-    background-color: #646cff;
+.csv-button {
+    width: 150px; 
+    height: 60px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #2a2a2a;
     color: white;
+    border: 1px solid #646cff;
+    border-radius: 8px;
+    margin-top: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 }
 
-.back-button:hover {
+.csv-button:hover {
     background-color: #535bf2;
 }

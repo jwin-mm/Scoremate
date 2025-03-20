@@ -12,7 +12,6 @@ const ExperimentPage: React.FC = () => {
   const [isTestStarted, setIsTestStarted] = useAtom(isTestStartedAtom);
   const [experimentTime, setExperimentTime] = useAtom(experimentTimeAtom);
   const [, setCsvData] = useAtom(csvDataAtom);
-  const [isExperimentFinished, setIsExperimentFinished] = useState(false);
 
   const navigate = useNavigate();
   const [experimentInterval, setExperimentInterval] = useState<NodeJS.Timeout | null>(null);
@@ -45,30 +44,6 @@ const ExperimentPage: React.FC = () => {
     };
   }, [isTestStarted]);
 
-  // Handle experiment timer (persisted with Jotai)
-  useEffect(() => {
-    if (isTestStarted) {
-      if (experimentInterval) clearInterval(experimentInterval);
-  
-      const interval = setInterval(() => {
-        setExperimentTime((prev) => prev + 1);
-      }, 1000);
-      setExperimentInterval(interval);
-    } else {
-      if (experimentInterval) {
-        clearInterval(experimentInterval);
-        setExperimentInterval(null);
-      }
-    }
-  
-    return () => {
-      if (experimentInterval) {
-        clearInterval(experimentInterval);
-      }
-    };
-  }, [isTestStarted]);
-  
-
    // Handles individual Timer Button updates
    const handleTimeUpdate = (label: string, time: number, wasActivated: boolean) => {
     setTimers((prev) => ({ ...prev, [label]: time }));
@@ -82,23 +57,13 @@ const ExperimentPage: React.FC = () => {
     }
   };
 
-  const handleStartStop = () => {
-    if (isTestStarted) {
-      setIsTestStarted(false);
-    } else {
-      setExperimentTime(0); // Reset timer when starting a new experiment
-      setIsTestStarted(true);
-    }
+  const handleStart = () => {
+    setIsTestStarted(true);
   };
 
-  const handleFinishExperiment = () => {
-    setIsExperimentFinished(true);
-    setIsTestStarted(false); 
-    if (experimentInterval) {
-      clearInterval(experimentInterval);
-      setExperimentInterval(null);
-    }
-  };
+  const handleStop = () => {
+    setIsTestStarted(false);
+  }
 
   const handleFlagButton = () => {
     let newFlag = formatTime(experimentTime)
@@ -121,7 +86,6 @@ const ExperimentPage: React.FC = () => {
     ].map(row => row).join('\n'); // Ensure proper CSV formatting
   
     setCsvData(csvContent);
-    handleFinishExperiment(); // Ensure experiment stops when CSV is generated
     navigate('/csv-viewer');
   };
   
@@ -129,47 +93,38 @@ const ExperimentPage: React.FC = () => {
   return (
     <div className="experiment-container">
       <h1 className="experiment-title">
-        {formData?.testName}, {formData?.ratNumber}
+        {formData?.testName} _{formData?.note}_ {formData?.ratNumber}
       </h1>
 
       <div className="experiment-timer">
-        <h2>Experiment Time: {formatTime(experimentTime)}</h2>
+        <h2>Test Time: {formatTime(experimentTime)}</h2>
       </div>
 
-      <div className='main-buttons'>
-        <button className='flag-button' onClick={handleFlagButton}>
-          FLAG
-        </button>
-        <div className="grid-container">
-          <div className="grid-row">
-            <TimerButton label="Pouncing" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
-            <TimerButton label="Pinning" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
-          </div>
-          <div className="grid-row">
-            <TimerButton label="Chasing" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
-            <TimerButton label="Boxing" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
-          </div>
-          <div className="grid-row">
-            <TimerButton label="AGI" onTimeUpdate={handleTimeUpdate}disabled={!isTestStarted || isExperimentFinished} />
-            <TimerButton label="Novel Exploration" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
-          </div>
+      <div className="grid-container">
+        <div className="grid-row">
+          <TimerButton label="Chasing" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted} />
+          <TimerButton label="Boxing" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted} />
+        </div>
+        <div className="grid-row">
+          <TimerButton label="Pouncing" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted} />
+          <TimerButton label="Novel Exploration" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted} />
+        </div>
+        <div className="grid-row">
+          <TimerButton label="Pinning" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted} />
+          <TimerButton label="AGI" onTimeUpdate={handleTimeUpdate}disabled={!isTestStarted} />
         </div>
       </div>
       
 
       <div className="button-row">
-        <button className="small-button" onClick={handleStartStop}>
-          {isTestStarted ? 'Stop Experiment' : 'Start Experiment'}
-        </button>
-
-        {/* Container to stack CSV and Finish Experiment buttons */}
-        <div className="right-buttons-container">
-          <button className="small-button" onClick={generateCSV}>CSV</button>
-          <button className="small-button finish-button" onClick={handleFinishExperiment}>Finish Experiment</button>
+        <button className="flag-button" onClick={handleFlagButton}>Flag</button>
+        <div className="small-buttons-container">
+          <button className="small-button" onClick={handleStart}>Start</button>
+          <button className="small-button" onClick={handleStop}>Stop</button>
         </div>
+        <button className="flag-button" onClick={handleFlagButton}>Flag</button>
       </div>
-
-      <button className="back-button" onClick={() => navigate(-1)}>Back</button>
+      <button className="csv-button" onClick={generateCSV}>CSV</button>
     </div>
   );
 };

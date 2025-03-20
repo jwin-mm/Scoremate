@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './TimerButton.css';
 
 interface TimerButtonProps {
@@ -8,9 +8,9 @@ interface TimerButtonProps {
 }
 
 const TimerButton: React.FC<TimerButtonProps> = ({ label, onTimeUpdate, disabled }) => {
-  const [time, setTime] = useState<number>(0);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
-  const [isActive, setIsActive] = useState(false); // Track if the button is active
+  const [holdTime, setHoldTime] = useState<number>(0);
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const [isActive, setIsActive] = useState(false);
 
   // Format the timer output as MM:SS
   const formatTime = (seconds: number): string => {
@@ -19,45 +19,34 @@ const TimerButton: React.FC<TimerButtonProps> = ({ label, onTimeUpdate, disabled
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
-  useEffect(() => {
-    if (disabled && intervalId) {
-      clearInterval(intervalId); // Stop the timer when isTestStarted becomes false
-      setIntervalId(null);
-      setIsActive(false);
-    }
-  }, [disabled]);
+  // Start timing when the user touches the button
+  const handleTouchStart = () => {
+    if (disabled || isActive) return;
+    setStartTime(Date.now());
+    setIsActive(true);
+  };
 
-  // Handle timer start/stop logic
-  const handleClick = () => {
-    if (disabled) return;
+  // Stop timing when the user lifts their finger
+  const handleTouchEnd = () => {
+    if (!isActive || startTime === null) return;
 
-    if (isActive) {
-      // Button is being deactivated → increment counter
-      clearInterval(intervalId!);
-      setIntervalId(null);
-      setIsActive(false);
-      onTimeUpdate(label, time, false); // wasActivated = false
-    } else {
-      // Button is being activated → start timer
-      const id = setInterval(() => {
-        setTime((prev) => {
-          const newTime = prev + 1;
-          onTimeUpdate(label, newTime, true); // wasActivated = true
-          return newTime;
-        });
-      }, 1000);
-      setIntervalId(id);
-      setIsActive(true);
-    }
+    const elapsedTime = Math.floor((Date.now() - startTime) / 1000); // Convert ms to sec
+    setHoldTime((prev) => prev + elapsedTime); // Accumulate total time
+    setStartTime(null);
+    setIsActive(false);
+
+    onTimeUpdate(label, holdTime + elapsedTime, false); // Update time when released
   };
 
   return (
-    <button 
-      className={`timer-button ${isActive ? 'active' : ''}`} 
-      onClick={handleClick} 
+    <button
+      className={`timer-button ${isActive ? 'active' : ''}`}
+      onTouchStart={handleTouchStart}  // Mobile press
+      onTouchEnd={handleTouchEnd}      // Mobile release
+      onTouchCancel={handleTouchEnd}   // Ensures timer stops if touch is interrupted
       disabled={disabled}
     >
-      {label}: {formatTime(time)}
+      {label}: {formatTime(holdTime)}
     </button>
   );
 };

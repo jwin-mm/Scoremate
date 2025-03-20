@@ -18,7 +18,7 @@ const FormPage: React.FC = () => {
 
     // Find fields that are empty
     const emptyFields = Object.entries(formData)
-      .filter(([key, value]) => key !== 'flags' && value.trim() === '') // Exclude "flags"
+      .filter(([key, value]) => key !== 'flags' && key !== 'note' && value.trim() === '') // Exclude "flags"
       .map(([key]) => key);
 
     if (emptyFields.length > 0) {
@@ -46,6 +46,10 @@ const FormPage: React.FC = () => {
       <div>
         <label>Rat Number:</label>
         <input name="ratNumber" value={formData.ratNumber} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Note:</label>
+        <input name="note" value={formData.note} onChange={handleChange} />
       </div>
       <button type="submit">Start Experiment</button>
     </form>

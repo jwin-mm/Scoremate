@@ -7,6 +7,7 @@ export const formDataAtom = atom({
   ratNumber: '',
   experimentDate: new Date().toISOString().split('T')[0], // YYYY-MM-DD format
   flags: '',
+  note: '',
 });
 
 // Atom for timer states
