@@ -6,7 +6,7 @@ import TimerButton from './TimerButton';
 import './ExperimentPage.css';
 
 const ExperimentPage: React.FC = () => {
-  const [formData] = useAtom(formDataAtom);
+  const [formData, setFormData] = useAtom(formDataAtom);
   const [timers, setTimers] = useAtom(timersAtom);
   const [timerCounters, setTimerCounters] = useAtom(timerCountersAtom);
   const [isTestStarted, setIsTestStarted] = useAtom(isTestStartedAtom);
@@ -100,6 +100,14 @@ const ExperimentPage: React.FC = () => {
     }
   };
 
+  const handleFlagButton = () => {
+    let newFlag = formatTime(experimentTime)
+    setFormData((prev) => ({
+      ...prev,
+      flags: prev.flags ? `${prev.flags}, ${newFlag}` : newFlag, // Append new flag
+    }));
+  }
+
   const generateCSV = () => {
     console.log(timers)
     const csvContent = [
@@ -109,6 +117,7 @@ const ExperimentPage: React.FC = () => {
       ...Object.entries(timers).map(([key, value]) => [
         key, timerCounters[key], value
       ]),
+      [`Flags:`, formData!.flags],
     ].map(row => row).join('\n'); // Ensure proper CSV formatting
   
     setCsvData(csvContent);
@@ -127,20 +136,26 @@ const ExperimentPage: React.FC = () => {
         <h2>Experiment Time: {formatTime(experimentTime)}</h2>
       </div>
 
-      <div className="grid-container">
-        <div className="grid-row">
-          <TimerButton label="Pouncing" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
-          <TimerButton label="Pinning" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
-        </div>
-        <div className="grid-row">
-          <TimerButton label="Chasing" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
-          <TimerButton label="Boxing" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
-        </div>
-        <div className="grid-row">
-          <TimerButton label="AGI" onTimeUpdate={handleTimeUpdate}disabled={!isTestStarted || isExperimentFinished} />
-          <TimerButton label="Novel Exploration" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
+      <div className='main-buttons'>
+        <button className='flag-button' onClick={handleFlagButton}>
+          FLAG
+        </button>
+        <div className="grid-container">
+          <div className="grid-row">
+            <TimerButton label="Pouncing" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
+            <TimerButton label="Pinning" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
+          </div>
+          <div className="grid-row">
+            <TimerButton label="Chasing" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
+            <TimerButton label="Boxing" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
+          </div>
+          <div className="grid-row">
+            <TimerButton label="AGI" onTimeUpdate={handleTimeUpdate}disabled={!isTestStarted || isExperimentFinished} />
+            <TimerButton label="Novel Exploration" onTimeUpdate={handleTimeUpdate} disabled={!isTestStarted || isExperimentFinished} />
+          </div>
         </div>
       </div>
+      
 
       <div className="button-row">
         <button className="small-button" onClick={handleStartStop}>

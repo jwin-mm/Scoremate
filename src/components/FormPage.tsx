@@ -18,7 +18,7 @@ const FormPage: React.FC = () => {
 
     // Find fields that are empty
     const emptyFields = Object.entries(formData)
-      .filter(([, value]) => value.trim() === '')
+      .filter(([key, value]) => key !== 'flags' && value.trim() === '') // Exclude "flags"
       .map(([key]) => key);
 
     if (emptyFields.length > 0) {

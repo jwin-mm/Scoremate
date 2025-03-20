@@ -27,6 +27,33 @@
     width: 80%;
 }
 
+/* Main Buttons Container */
+.main-buttons {
+    display: flex;
+    align-items: center; /* Vertically aligns flag-button */
+    justify-content: center;
+    position: relative;
+    width: 100%;
+}
+
+/* Flag Button - Vertically Centered on the Left */
+.flag-button {
+    position: absolute;
+    left: 20px; /* Adjust distance from left edge */
+    top: 50%;
+    transform: translateY(-50%); /* Centers vertically */
+    width: 60px; /* Adjust button size */
+    height: 60px;
+    background-color: rgb(194, 66, 66); 
+    border: none;
+    border-radius: 50%; /* Makes it circular */
+    cursor: pointer;
+}
+
+.flag-button:hover {
+    background-color: rgb(116, 33, 33);
+}
+
 /* Grid Layout - One Row Per Line */
 .grid-container {
     display: flex;
@@ -44,6 +71,7 @@
     width: 100%;
     max-width: 800px; /* Prevents stretching too wide */
 }
+
 
 
 /* Small Button Row */
