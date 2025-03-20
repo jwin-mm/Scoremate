@@ -6,7 +6,7 @@
     font-weight: bold;
     border: 1px solid #646cff;
     border-radius: 12px;
-    background-color: #444;
+    background-color: #444 !important;
     color: white;
     cursor: pointer;
     transition: background-color;
