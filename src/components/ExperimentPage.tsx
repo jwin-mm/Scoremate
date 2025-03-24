@@ -18,22 +18,20 @@ const ExperimentPage: React.FC = () => {
 
   // Function to format time as MM:SS
   const formatTime = (milliseconds: number): string => {
-    const mins = Math.floor(milliseconds / 60000); // Convert to minutes
-    const secs = Math.floor((milliseconds % 60000) / 1000); // Convert remaining to seconds
-    const ms = milliseconds % 1000; // Get remaining milliseconds
-
-    return `${mins}:${secs < 10 ? '0' : ''}${secs}:${ms.toString().padStart(3, '0')}`;
-};
-
-
-  // Handle experiment timer (persisted with Jotai)
+    const mins = Math.floor(milliseconds / 60000); // Total minutes
+    const secs = Math.floor((milliseconds % 60000) / 1000); // Remaining seconds
+    const ms = milliseconds % 1000; // Remaining milliseconds
+  
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}:${ms.toString().padStart(3, '0')}`;
+  };
+  
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null; // Declare within useEffect
-
+    let interval: NodeJS.Timeout | null = null;
+  
     if (isTestStarted) {
       interval = setInterval(() => {
-        setExperimentTime((prev) => prev + 1);
-      }, 1000);
+        setExperimentTime((prev) => prev + 100);
+      }, 100);
       setExperimentInterval(interval);
     } else {
       if (experimentInterval) {
@@ -42,12 +40,13 @@ const ExperimentPage: React.FC = () => {
     }
   
     return () => {
-      if (interval) clearInterval(interval); // Properly clears the interval
+      if (interval) clearInterval(interval);
     };
   }, [isTestStarted]);
+  
 
-    // Handles individual Timer Button updates
-    const handleTimeUpdate = (label: string, time: number, wasActivated: boolean) => {
+  // Handles individual Timer Button updates
+  const handleTimeUpdate = (label: string, time: number, wasActivated: boolean) => {
     setTimers((prev) => ({ ...prev, [label]: time }));
 
     // If wasActivated is false, it means the button was toggled off → increment the counter
