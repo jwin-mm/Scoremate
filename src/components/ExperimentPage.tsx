@@ -30,8 +30,8 @@ const ExperimentPage: React.FC = () => {
   
     if (isTestStarted) {
       interval = setInterval(() => {
-        setExperimentTime((prev) => prev + 100);
-      }, 100);
+        setExperimentTime((prev) => prev + 10);
+      }, 10);
       setExperimentInterval(interval);
     } else {
       if (experimentInterval) {

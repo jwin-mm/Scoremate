@@ -28,11 +28,11 @@ const TimerButton: React.FC<TimerButtonProps> = ({ label, onTimeUpdate, disabled
 
     const id = setInterval(() => {
       setHoldTime((prev) => {
-        const updated = prev + 100;
+        const updated = prev + 10;
         onTimeUpdate(label, updated, true);
         return updated;
       });
-    }, 100);
+    }, 10);
 
     setIntervalId(id);
   };
