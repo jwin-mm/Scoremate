@@ -47,7 +47,10 @@ const ExperimentPage: React.FC = () => {
 
   // Handles individual Timer Button updates
   const handleTimeUpdate = (label: string, time: number, wasActivated: boolean) => {
-    setTimers((prev) => ({ ...prev, [label]: time }));
+    setTimers((prev) => ({ 
+      ...prev, 
+      [label]: (prev[label] || 0) + time 
+    }));
 
     // If wasActivated is false, it means the button was toggled off → increment the counter
     if (!wasActivated) {
