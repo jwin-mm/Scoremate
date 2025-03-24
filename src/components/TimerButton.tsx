@@ -14,10 +14,9 @@ const TimerButton: React.FC<TimerButtonProps> = ({ label, onTimeUpdate, disabled
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
   const formatTime = (milliseconds: number): string => {
-    const totalSeconds = Math.floor(milliseconds / 1000);
-    const mins = Math.floor(totalSeconds / 60);
-    const secs = totalSeconds % 60;
-    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    const secs = Math.floor(milliseconds / 1000);
+    const ms = milliseconds % 1000;
+    return `${secs}.${ms.toString().padStart(3, '0')}s`;
   };
 
   const handleTouchStart = () => {
@@ -29,11 +28,11 @@ const TimerButton: React.FC<TimerButtonProps> = ({ label, onTimeUpdate, disabled
 
     const id = setInterval(() => {
       setHoldTime((prev) => {
-        const updated = prev + 1000;
+        const updated = prev + 100;
         onTimeUpdate(label, updated, true);
         return updated;
       });
-    }, 1000);
+    }, 100);
 
     setIntervalId(id);
   };
@@ -66,7 +65,7 @@ const TimerButton: React.FC<TimerButtonProps> = ({ label, onTimeUpdate, disabled
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchEnd}
       disabled={disabled}
-      style={{ userSelect: 'none', WebkitUserSelect: 'none' }} // prevent text selection
+      style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
     >
       {label}: {formatTime(holdTime)}
     </button>
