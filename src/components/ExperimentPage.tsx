@@ -22,7 +22,7 @@ const ExperimentPage: React.FC = () => {
     const secs = Math.floor((milliseconds % 60000) / 1000); // Remaining seconds
     const ms = milliseconds % 1000; // Remaining milliseconds
   
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}:${ms.toString().padStart(2, '0')}`;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}:${ms.toString()}`;
   };
   
   useEffect(() => {
