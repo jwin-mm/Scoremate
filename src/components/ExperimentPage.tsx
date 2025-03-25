@@ -16,14 +16,15 @@ const ExperimentPage: React.FC = () => {
   const navigate = useNavigate();
   const [experimentInterval, setExperimentInterval] = useState<NodeJS.Timeout | null>(null);
 
-  // Function to format time as MM:SS:MSMS
+  // Function to format time as MM:SS:MMM
   const formatTime = (milliseconds: number): string => {
     const mins = Math.floor(milliseconds / 60000); // Total minutes
     const secs = Math.floor((milliseconds % 60000) / 1000); // Remaining seconds
-    const ms = milliseconds % 1000; // Remaining milliseconds
-  
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}:${ms.toString()}`;
+    const ms = milliseconds % 1000; // Remaining milliseconds (0–999)
+
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}:${ms.toString().padStart(3, '0')}`;
   };
+
   
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
