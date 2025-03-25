@@ -18,11 +18,11 @@ const ExperimentPage: React.FC = () => {
 
   // Function to format time as MM:SS:MSMS
   const formatTime = (milliseconds: number): string => {
-    const mins = Math.floor(milliseconds / 60000); // Total minutes
-    const secs = Math.floor((milliseconds % 60000) / 1000); // Remaining seconds
-    const ms = milliseconds % 1000; // Remaining milliseconds
+    const mins = Math.floor(milliseconds / 60000);
+    const secs = Math.floor((milliseconds % 60000) / 1000);
+    const ms = milliseconds % 1000;
   
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}:${ms.toString()}`;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}:${ms.toString().padStart(3, '0')}`;
   };
   
   useEffect(() => {
