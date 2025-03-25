@@ -27,12 +27,10 @@ const TimerButton: React.FC<TimerButtonProps> = ({ label, onTimeUpdate, disabled
     setIsActive(true);
 
     const id = setInterval(() => {
-      setHoldTime((prev) => {
-        const updated = prev + 10;
-        onTimeUpdate(label, updated, true);
-        return updated;
-      });
-    }, 10);
+      const elapsed = Date.now() - now;
+      setHoldTime(elapsed);
+      onTimeUpdate(label, elapsed, true);
+    }, 10); // Visual update every 10ms
 
     setIntervalId(id);
   };
@@ -40,15 +38,12 @@ const TimerButton: React.FC<TimerButtonProps> = ({ label, onTimeUpdate, disabled
   const handleTouchEnd = () => {
     if (!isActive || startTime === null) return;
 
-    const elapsed = Date.now() - startTime;
-    setHoldTime((prev) => {
-      const total = prev + elapsed;
-      onTimeUpdate(label, total, false); // Final update when released
-      return total;
-    });
-
     if (intervalId) clearInterval(intervalId);
     setIntervalId(null);
+
+    const finalTime = Date.now() - startTime;
+    onTimeUpdate(label, finalTime, false);
+
     setIsActive(false);
     setStartTime(null);
     setHoldTime(0); // Reset after release
