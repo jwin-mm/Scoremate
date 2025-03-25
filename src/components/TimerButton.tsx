@@ -41,9 +41,11 @@ const TimerButton: React.FC<TimerButtonProps> = ({ label, onTimeUpdate, disabled
     if (!isActive || startTime === null) return;
 
     const elapsed = Date.now() - startTime;
-    const finalTime = holdTime + elapsed;
-
-    onTimeUpdate(label, finalTime, false);
+    setHoldTime((prev) => {
+      const total = prev + elapsed;
+      onTimeUpdate(label, total, false); // Final update when released
+      return total;
+    });
 
     if (intervalId) clearInterval(intervalId);
     setIntervalId(null);
