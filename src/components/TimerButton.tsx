@@ -16,7 +16,7 @@ const TimerButton: React.FC<TimerButtonProps> = ({ label, onTimeUpdate, disabled
   const formatTime = (milliseconds: number): string => {
     const secs = Math.floor(milliseconds / 1000);
     const ms = milliseconds % 1000;
-    return `${secs}.${ms.toString().padStart(3, '0')}s`;
+    return `${secs}.${ms.toString().padStart(2, '0')}s`;
   };
 
   const handleTouchStart = () => {
