@@ -49,6 +49,21 @@ const TimerButton: React.FC<TimerButtonProps> = ({ label, onTimeUpdate, disabled
     setHoldTime(0); // Reset after release
   };
 
+  // const handleClick = () => {
+  //   const startTime = Date.now();
+  //   console.log("Start Time:", startTime);
+  
+  //   setTimeout(() => {
+  //     const finalTime = Date.now();
+  //     console.log("Final Time:", finalTime);
+
+  //     const diff = finalTime - startTime
+  //     console.log(diff)
+  
+  //     onTimeUpdate(label, diff, false);
+  //   }, 1000);
+  // };
+
   useEffect(() => {
     return () => {
       if (intervalId) clearInterval(intervalId);
@@ -58,6 +73,7 @@ const TimerButton: React.FC<TimerButtonProps> = ({ label, onTimeUpdate, disabled
   return (
     <button
       className={`timer-button ${isActive ? 'active' : ''}`}
+      // onClick={handleClick}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       onTouchCancel={handleTouchEnd}

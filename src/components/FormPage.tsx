@@ -28,7 +28,6 @@ const FormPage: React.FC = () => {
 
     setErrorMessage(''); // Clear any previous error messages
     setFormData(formData);
-    console.log(formData)
     navigate('/experiment');
   };
 

@@ -83,7 +83,7 @@ const ExperimentPage: React.FC = () => {
       [`Date:`, formData?.experimentDate].join(','),
       ['Action Type', 'Freq', 'Duration (Total)'].join(','), // Column headers
       ...Object.entries(timers).map(([key, value]) => [
-        key, timerCounters[key], formatTime(value * 1000)
+        key, timerCounters[key], formatTime(value)
       ]),
       [`Flags:`, formData!.flags],
     ].map(row => row).join('\n'); // Ensure proper CSV formatting
