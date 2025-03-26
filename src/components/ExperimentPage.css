@@ -11,6 +11,10 @@
     border-radius: 10px;
 }
 
+.experiment-timer {
+    font-family: monospace;
+}
+
 /* Title Styling */
 .timer-row {
     display: flex;
