@@ -41,8 +41,8 @@ const TimerButton: React.FC<TimerButtonProps> = ({ label, onTimeUpdate, disabled
     if (intervalId) clearInterval(intervalId);
     setIntervalId(null);
 
-    const finalTime = Date.now() - startTime;
-    onTimeUpdate(label, finalTime, false);
+    // const finalTime = Date.now() - startTime;
+    onTimeUpdate(label, 0, false);
 
     setIsActive(false);
     setStartTime(null);
